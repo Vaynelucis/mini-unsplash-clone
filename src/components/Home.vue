@@ -12,7 +12,10 @@
           id="search-input"
           placeholder="Search for photo"
         >
-        <p @click="searchEntry" v-else class="searchResult">Search Results for "{{searchTerm}}"</p>
+        <p @click="searchEntry" v-else class="searchResult">
+          Search Results for
+          <span class="searchedItem">&#8220;{{searchTerm}}&#8221;</span>
+        </p>
       </div>
     </div>
     <!-- <div class="main-body"><div class="image-container">a</div><div class="image-container">b</div><div class="image-container">c</div><div class="image-container">d</div><div class="image-container">e</div><div class="image-container">f</div><div class="image-container">g</div></div> -->
