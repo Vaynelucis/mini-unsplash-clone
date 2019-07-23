@@ -77,8 +77,27 @@ export default {
 
   data() {
     return {
-      blocks: [1, 2, 3, 4, 5, 6, 7]
+      blocks: [1, 2, 3, 4, 5, 6, 7],
+      images: []
     };
+  },
+  methods: {
+    getLatestImages: function() {
+      // this.loader = true
+      const baseURI =
+        "https://api.unsplash.com/photos/?client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
+      axios.get(baseURI).then(result => {
+        let response = result.data;
+        console.log(response);
+        response.forEach(element => {
+          this.images.push(element);
+          // this.loader = false
+        });
+      });
+    }
+  },
+  created() {
+    this.getLatestImages();
   }
 };
 </script>
