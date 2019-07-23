@@ -78,7 +78,8 @@ export default {
   data() {
     return {
       blocks: [1, 2, 3, 4, 5, 6, 7],
-      images: []
+      images: [],
+      searchTerm: ""
     };
   },
   methods: {
@@ -93,6 +94,18 @@ export default {
           this.images.push(element);
           // this.loader = false
         });
+      });
+    },
+    searchEntry: function() {
+      // this.loader = true
+      let query = this.searchTerm;
+      const baseURI =
+        "https://api.unsplash.com/search/photos/?query=" +
+        `${query}` +
+        "&client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
+      axios.get(baseURI).then(result => {
+        this.images = result.data.results;
+        // this.loader = false
       });
     }
   },
