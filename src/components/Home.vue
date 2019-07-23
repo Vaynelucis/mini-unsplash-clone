@@ -71,14 +71,9 @@ export default {
   components: {
     PulseLoader
   },
-  name: "HelloWorld",
-  props: {
-    msg: String
-  },
 
   data() {
     return {
-      blocks: [1, 2, 3, 4, 5, 6, 7],
       images: [],
       searchTerm: "",
       notSearched: true,
@@ -192,7 +187,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
 @import "../styles/main.css";
 </style>
