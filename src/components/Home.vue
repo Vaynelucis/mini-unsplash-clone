@@ -33,7 +33,13 @@
     <div class="main">
       <div v-masonry origin-left="true" transition-duration="1s" gutter="36" item-selector=".item">
         <div class="main-body">
-          <div v-masonry-tile class="item" v-for="(image,index) in images" :key="index">
+          <div
+            v-masonry-tile
+            @click="modal(image.urls.regular, image.user.name, image.user.location)"
+            class="item"
+            v-for="(image,index) in images"
+            :key="index"
+          >
             <!-- <div class="image-container">a</div> -->
             <img class="image" :src="image.urls.small" alt>
             <div class="image-caption">
@@ -77,6 +83,13 @@
           <div class="image-container">g</div>
         </div>
       </div>-->
+    </div>
+
+    <div id="myModal" class="modal">
+      <span class="close" @click="close">&times;</span>
+      <img class="modal-content" id="img01">
+      <div id="caption"></div>
+      <div id="caption-location"></div>
     </div>
   </div>
 </template>
@@ -129,10 +142,32 @@ export default {
       } else {
         this.notSearched = true;
       }
+    },
+    modal: function(image, name, location) {
+      let modal = document.getElementById("myModal");
+      let modalImg = document.getElementById("img01");
+      let modalCaption = document.getElementById("caption");
+      let modalCaptionLocation = document.getElementById("caption-location");
+      modal.style.display = "block";
+      modalImg.src = image;
+      modalImg.alt = name;
+      modalCaption.textContent = name;
+      modalCaptionLocation.textContent = location;
+    },
+    close: function() {
+      let modal = document.getElementById("myModal");
+      modal.style.display = "none";
     }
   },
   created() {
     this.getLatestImages();
+  },
+  watch: {
+    images: function() {
+      if (this.images.length == 0) {
+        this.getLatestImages();
+      }
+    }
   }
 };
 </script>
