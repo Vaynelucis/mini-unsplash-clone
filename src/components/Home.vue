@@ -4,6 +4,7 @@
       <div class="search-bar">
         <!-- <span class="fa fa-search" id="search-icon"></span> -->
         <i @click="searchEntry" class="fa fa-search fa-lg" aria-hidden="true"></i>
+
         <input
           v-if="notSearched"
           v-model="searchTerm"
@@ -110,6 +111,7 @@
 <script>
 import axios from "axios";
 import { PulseLoader } from "@saeris/vue-spinners";
+import loading_screen from "../assets/grey-loading-screen.png";
 
 export default {
   components: {
@@ -210,14 +212,42 @@ export default {
     loader: function() {
       if (this.loader == true) {
         this.images = [
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-          { urls: { small: "", regular: "" }, user: { name: "Loading" } }
+          {
+            urls: {
+              // small: "../assets/grey-loading-screen.png",
+              small: loading_screen,
+              regular: ""
+            },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          },
+          {
+            urls: { small: loading_screen, regular: loading_screen },
+            user: { name: "Loading" }
+          }
         ];
       }
     },
