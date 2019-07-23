@@ -5,12 +5,14 @@
         <!-- <span class="fa fa-search" id="search-icon"></span> -->
         <i @click="searchEntry" class="fa fa-search fa-lg" aria-hidden="true"></i>
         <input
+          v-if="notSearched"
           v-model="searchTerm"
           type="text"
           @keyup.enter="searchEntry"
           id="search-input"
           placeholder="Search for photo"
         >
+        <p @click="searchEntry" v-else class="searchResult">Search Results for "{{searchTerm}}"</p>
       </div>
     </div>
     <!-- <div class="main-body"><div class="image-container">a</div><div class="image-container">b</div><div class="image-container">c</div><div class="image-container">d</div><div class="image-container">e</div><div class="image-container">f</div><div class="image-container">g</div></div> -->
@@ -90,7 +92,8 @@ export default {
     return {
       blocks: [1, 2, 3, 4, 5, 6, 7],
       images: [],
-      searchTerm: ""
+      searchTerm: "",
+      notSearched: true
     };
   },
   methods: {
@@ -109,15 +112,20 @@ export default {
     },
     searchEntry: function() {
       // this.loader = true
-      let query = this.searchTerm;
-      const baseURI =
-        "https://api.unsplash.com/search/photos/?query=" +
-        `${query}` +
-        "&client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
-      axios.get(baseURI).then(result => {
-        this.images = result.data.results;
-        // this.loader = false
-      });
+      if (this.notSearched == true) {
+        let query = this.searchTerm;
+        const baseURI =
+          "https://api.unsplash.com/search/photos/?query=" +
+          `${query}` +
+          "&client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
+        axios.get(baseURI).then(result => {
+          this.images = result.data.results;
+          // this.loader = false
+        });
+        this.notSearched = false;
+      } else {
+        this.notSearched = true;
+      }
     }
   },
   created() {

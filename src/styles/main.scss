@@ -41,7 +41,12 @@
         // width: 10%;
         // height: 100%
         padding: 20px;
+
         // justify-content: center;
+        &:hover {
+            cursor: pointer;
+        }
+
         margin: auto;
         // padding: auto;
         // align-content: center;
@@ -64,6 +69,23 @@
         &:focus,
         &:active {
             outline: none;
+        }
+    }
+
+    .searchResult {
+        flex: 1;
+        // align-self: flex-end;
+        // justify-self: flex-end;
+        // justify-self: flex-end;
+        // width: 90%;
+        // margin: 0 5px;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        align-self: center;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 }
