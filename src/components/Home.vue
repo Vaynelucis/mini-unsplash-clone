@@ -22,8 +22,13 @@
     <div class="main">
       <div v-masonry origin-left="true" transition-duration="1s" gutter="36" item-selector=".item">
         <div class="main-body">
-          <div v-masonry-tile class="item" v-for="(item,index) in blocks" :key="index">
-            <div class="image-container">a</div>
+          <div v-masonry-tile class="item" v-for="(image,index) in images" :key="index">
+            <!-- <div class="image-container">a</div> -->
+            <img class="image" :src="image.urls.small" alt>
+            <div class="image-caption">
+              <p class="user-name">{{image.user.name}}</p>
+              <p class="user-location">{{image.user.location}}</p>
+            </div>
           </div>
           <!-- <div v-masonry-tile class="item">
             <div class="image-container">b</div>
