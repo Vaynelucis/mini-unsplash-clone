@@ -94,6 +94,29 @@
             // font-size: 30px;
         }
     }
+
+    .searching {
+        flex: 1;
+
+        // align-self: flex-end;
+        // justify-self: flex-end;
+        // justify-self: flex-end;
+        // width: 90%;
+        // margin: 0 5px;
+        font-size: 28px;
+        border-radius: 10px;
+        border: none;
+        align-self: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .searchedItem {
+            color: #777;
+            // font-size: 30px;
+        }
+    }
 }
 
 .grid-item {
@@ -131,7 +154,7 @@
 
         .image-caption {
             position: relative;
-            top: -20%;
+            top: -24%;
             left: 8%;
             color: white;
             // transition: font-size 0.25s, opacity 0.25s ease-in-out;
@@ -148,6 +171,10 @@
                 font-weight: 100;
                 font-size: 12px;
                 // padding: 4px;
+            }
+
+            .loader {
+                margin-bottom: 10px;
             }
         }
     }

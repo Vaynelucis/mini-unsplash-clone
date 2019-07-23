@@ -12,8 +12,17 @@
           id="search-input"
           placeholder="Search for photo"
         >
-        <p @click="searchEntry" v-else class="searchResult">
+        <p
+          @click="searchEntry"
+          v-else-if=" notSearched==false && loader==false "
+          class="searchResult"
+        >
           Search Results for
+          <span class="searchedItem">&#8220;{{searchTerm}}&#8221;</span>
+        </p>
+
+        <p @click="searchEntry" class="searching" v-else-if="notSearched==false && loader==true">
+          Searching for
           <span class="searchedItem">&#8220;{{searchTerm}}&#8221;</span>
         </p>
       </div>
@@ -46,8 +55,8 @@
               <p class="user-name">{{image.user.name}}</p>
               <p class="user-location">{{image.user.location}}</p>
               <div class="loader" v-if="loader">
-                    <pulse-loader v-show="loader" class="custom-class"  :color='color' :loading='loader'></pulse-loader>
-                  </div>
+                <pulse-loader v-show="loader" class="custom-class" color="white" :loading="loader"></pulse-loader>
+              </div>
             </div>
           </div>
           <!-- <div v-masonry-tile class="item">
@@ -100,8 +109,12 @@
 
 <script>
 import axios from "axios";
+import { PulseLoader } from "@saeris/vue-spinners";
 
 export default {
+  components: {
+    PulseLoader
+  },
   name: "HelloWorld",
   props: {
     msg: String
@@ -113,12 +126,12 @@ export default {
       images: [],
       searchTerm: "",
       notSearched: true,
-      loader:false,
+      loader: false
     };
   },
   methods: {
     getLatestImages: function() {
-      this.loader = true
+      this.loader = true;
       const baseURI =
         "https://api.unsplash.com/photos/?client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
       axios.get(baseURI).then(result => {
@@ -126,12 +139,12 @@ export default {
         console.log(response);
         response.forEach(element => {
           this.images.push(element);
-          this.loader = false
+          this.loader = false;
         });
       });
     },
     searchEntry: function() {
-      this.loader = true
+      this.loader = true;
       if (this.notSearched == true) {
         let query = this.searchTerm;
         const baseURI =
@@ -140,12 +153,12 @@ export default {
           "&client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
         axios.get(baseURI).then(result => {
           this.images = result.data.results;
-          this.loader = false
+          this.loader = false;
         });
         this.notSearched = false;
       } else {
         this.notSearched = true;
-        this.loader=false;
+        this.loader = false;
       }
     },
     modal: function(image, name, location) {
