@@ -15,12 +15,17 @@
         >
         <p
           @click="searchEntry"
-          v-else-if=" notSearched==false && loader==false "
+          v-else-if=" notSearched==false && loader==false && searchTerm !=='' "
           class="searchResult"
         >
           Search Results for
           <span class="searchedItem">&#8220;{{searchTerm}}&#8221;</span>
         </p>
+        <p
+          @click="searchEntry"
+          v-else-if=" notSearched==false && loader==false && searchTerm==='' "
+          class="searchResult"
+        >You didn't Input a search term</p>
 
         <p @click="searchEntry" class="searching" v-else-if="notSearched==false && loader==true">
           Searching for
