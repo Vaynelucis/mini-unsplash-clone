@@ -5,5 +5,6 @@ module.exports = {
       preProcessor: "sass",
       patterns: [path.resolve(__dirname, "./src/styles/main.scss")]
     }
-  }
+  },
+  publicPath: "/mini-unsplash-clone/"
 };
