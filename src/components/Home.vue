@@ -45,6 +45,9 @@
             <div class="image-caption">
               <p class="user-name">{{image.user.name}}</p>
               <p class="user-location">{{image.user.location}}</p>
+              <div class="loader" v-if="loader">
+                    <pulse-loader v-show="loader" class="custom-class"  :color='color' :loading='loader'></pulse-loader>
+                  </div>
             </div>
           </div>
           <!-- <div v-masonry-tile class="item">
@@ -109,12 +112,13 @@ export default {
       blocks: [1, 2, 3, 4, 5, 6, 7],
       images: [],
       searchTerm: "",
-      notSearched: true
+      notSearched: true,
+      loader:false,
     };
   },
   methods: {
     getLatestImages: function() {
-      // this.loader = true
+      this.loader = true
       const baseURI =
         "https://api.unsplash.com/photos/?client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
       axios.get(baseURI).then(result => {
@@ -122,12 +126,12 @@ export default {
         console.log(response);
         response.forEach(element => {
           this.images.push(element);
-          // this.loader = false
+          this.loader = false
         });
       });
     },
     searchEntry: function() {
-      // this.loader = true
+      this.loader = true
       if (this.notSearched == true) {
         let query = this.searchTerm;
         const baseURI =
@@ -136,11 +140,12 @@ export default {
           "&client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
         axios.get(baseURI).then(result => {
           this.images = result.data.results;
-          // this.loader = false
+          this.loader = false
         });
         this.notSearched = false;
       } else {
         this.notSearched = true;
+        this.loader=false;
       }
     },
     modal: function(image, name, location) {
