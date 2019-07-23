@@ -94,7 +94,6 @@ export default {
       axios.get(baseURI).then(result => {
         let response = result.data;
         let resultArray = [];
-        console.log(response);
         response.forEach(element => {
           resultArray.push(element);
           this.loader = false;
