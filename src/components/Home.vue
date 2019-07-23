@@ -3,8 +3,14 @@
     <div class="search">
       <div class="search-bar">
         <!-- <span class="fa fa-search" id="search-icon"></span> -->
-        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-        <input type="text" id="search-input" placeholder="Search for photo">
+        <i @click="searchEntry" class="fa fa-search fa-lg" aria-hidden="true"></i>
+        <input
+          v-model="searchTerm"
+          type="text"
+          @keyup.enter="searchEntry"
+          id="search-input"
+          placeholder="Search for photo"
+        >
       </div>
     </div>
     <!-- <div class="main-body"><div class="image-container">a</div><div class="image-container">b</div><div class="image-container">c</div><div class="image-container">d</div><div class="image-container">e</div><div class="image-container">f</div><div class="image-container">g</div></div> -->
