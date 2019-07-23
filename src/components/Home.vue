@@ -2,10 +2,10 @@
   <div class="body">
     <div class="search">
       <div class="search-bar">
-        <!-- <span class="fa fa-search" id="search-icon"></span> -->
         <i @click="searchEntry" class="fa fa-search fa-lg" aria-hidden="true"></i>
 
         <input
+          autocomplete="off"
           v-if="notSearched"
           v-model="searchTerm"
           type="text"
@@ -28,18 +28,7 @@
         </p>
       </div>
     </div>
-    <!-- <div class="main-body"><div class="image-container">a</div><div class="image-container">b</div><div class="image-container">c</div><div class="image-container">d</div><div class="image-container">e</div><div class="image-container">f</div><div class="image-container">g</div></div> -->
-    <!-- <div class="main-body-2"> -->
-    <!-- <div class="grid">
-      <div class="grid-item image-container-2">a</div>
-      <div class="grid-item image-container-2">b</div>
-      <div class="image-container-2">c</div>
-      <div class="image-container-2">d</div>
-      <div class="image-container-2">e</div>
-      <div class="image-container-2">f</div>
-      <div class="image-container-2">g</div>
-    </div>-->
-    <!-- </div> -->
+
     <div class="main">
       <div v-masonry origin-left="true" transition-duration="1s" gutter="36" item-selector=".item">
         <div class="main-body">
@@ -50,7 +39,6 @@
             v-for="(image,index) in images"
             :key="index"
           >
-            <!-- <div class="image-container">a</div> -->
             <img class="image" :src="image.urls.small" alt>
             <div class="image-caption">
               <p class="user-name">{{image.user.name}}</p>
@@ -60,42 +48,8 @@
               </div>
             </div>
           </div>
-          <!-- <div v-masonry-tile class="item">
-            <div class="image-container">b</div>
-          </div>
-          <div v-masonry-tile class="item">
-            <div class="image-container">c</div>
-          </div>
-          <div v-masonry-tile class="item">
-            <div class="image-container">a</div>
-          </div>
-          <div v-masonry-tile class="item">
-            <div class="image-container">b</div>
-          </div>
-          <div v-masonry-tile class="item">
-            <div class="image-container">c</div>
-          </div>
-          <div v-masonry-tile class="item">
-            <div class="image-container">c</div>
-          </div>-->
         </div>
       </div>
-      <!-- <div v-masonry origin-left="true" transition-duration="1s" gutter="20" item-selector=".item">
-        <div v-masonry-tile class="item">
-          <div class="image-container">d</div>
-        </div>
-        <div v-masonry-tile class="item">
-          <div class="image-container">e</div>
-        </div>
-        <div v-masonry-tile class="item">
-          <div class="image-container">f</div>
-        </div>
-      </div>
-      <div v-masonry origin-left="true" transition-duration="1s" gutter="20" item-selector=".item">
-        <div v-masonry-tile class="item">
-          <div class="image-container">g</div>
-        </div>
-      </div>-->
     </div>
 
     <div id="myModal" class="modal">
@@ -135,17 +89,6 @@ export default {
     getLatestImages: function() {
       this.loader = true;
 
-      // this.images = [
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } },
-      //   { urls: { small: "", regular: "" }, user: { name: Loading } }
-      // ];
-
       const baseURI =
         "https://api.unsplash.com/photos/?client_id=b43a1bc0c89846d2babed5151d8668cc80bb8ed19ccfffe0b846528d90198e10&per_page=8&order_by=latest";
       axios.get(baseURI).then(result => {
@@ -153,7 +96,6 @@ export default {
         let resultArray = [];
         console.log(response);
         response.forEach(element => {
-          // this.images.push(element);
           resultArray.push(element);
           this.loader = false;
         });
@@ -164,16 +106,6 @@ export default {
       this.loader = true;
 
       if (this.notSearched == true) {
-        // this.images = [
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } },
-        //   { urls: { small: "", regular: "" }, user: { name: "Loading" } }
-        // ];
         let query = this.searchTerm;
         const baseURI =
           "https://api.unsplash.com/search/photos/?query=" +
@@ -214,7 +146,6 @@ export default {
         this.images = [
           {
             urls: {
-              // small: "../assets/grey-loading-screen.png",
               small: loading_screen,
               regular: ""
             },
