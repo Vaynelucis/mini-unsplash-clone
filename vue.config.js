@@ -2,9 +2,9 @@ const path = require("path");
 module.exports = {
   pluginOptions: {
     "style-resources-loader": {
-      preProcessor: "sass",
-      patterns: [path.resolve(__dirname, "./src/styles/main.scss")]
+      preProcessor: "scss",
+      patterns: [path.resolve(__dirname, "./src/assets/styles/main.scss")]
     }
   },
-  publicPath: "/mini-unsplash-clone/"
+  publicPath: "mini-unsplash-clone"
 };
