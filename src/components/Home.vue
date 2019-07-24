@@ -69,7 +69,7 @@
 
 <script>
 import axios from "axios";
-import "../assets/styles/main.css";
+import "../assets/styles/main.scss";
 import { PulseLoader } from "@saeris/vue-spinners";
 import loading_screen from "../assets/grey-loading-screen.png";
 
